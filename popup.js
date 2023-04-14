@@ -1,9 +1,14 @@
 console.log('ADDON TEST');
 
 document.querySelector('#click').addEventListener('click', () => {
-    console.log('clicked!');
+    let playersArray = [];
+    document.querySelectorAll('.players-checkbox').forEach((checkbox) => {
+        if (checkbox.checked) playersArray.push(checkbox.id);
+    });
+    if (playersArray.length < 1) playersArray = [2, 3, 4];
+
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: 'hello', players: [] });
+        chrome.tabs.sendMessage(tabs[0].id, { action: 'hello', players: playersArray });
     });
 });
 
