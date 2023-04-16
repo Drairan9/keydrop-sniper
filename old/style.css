@@ -1,42 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@600;700;800&display=swap');
 
-:root{
-    --app-height: 500px;
-    --app-width: 300px;
+html{
+	width: 300px;
+	height: 500px;
 }
 
 *{
 	font-family: 'Sarabun', sans-serif;
 }
 
-html{
-	width: var(--app-width);
-	height: var(--app-height);
-}
-
 body{
     background-image: linear-gradient(144deg, #262B2F 50%, #16191D 100%);
-    margin: 0;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
-.wrapper{
-	width: var(--app-width);
-	height: var(--app-height);
-    overflow: hidden;
-    display: grid;
-    justify-items: center;
+::-webkit-scrollbar{
+	display: none;
 }
 
-/* CONTROL PANEL */
+.body-wrapper{
+	overflow: hidden;
+	height: 500px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
 
-.control-wrapper{
-	width: fit-content;
-	height: var(--app-height);
-    display: grid;
+.cases-wrapper{
+	background-color: red;
+	width: 100vw;
+	height: 100vh;
+}
+
+.panel-wrapper{
+	display: grid;
 	grid-template-rows: 80px repeat(3, 1fr);
 	justify-items: center;
 	align-items: center;
 	row-gap: 5px;
+	width: fit-content;
+	height: 100vh;
 }
 
 .title{
@@ -61,7 +69,11 @@ body{
 	cursor: pointer;
 }
 
-.join-button::after{
+.join-button:hover{
+	box-shadow: 0px 0px 15px rgba(204, 0, 255, 0.5);
+}
+
+.join-button::after, .choose-case-button::after{
 	content: '';
 	background-image: linear-gradient(135deg, #be4bdb 5%, #9775fa 95%);
 	width: calc(100% + 4px);
@@ -71,11 +83,14 @@ body{
 	z-index: -1;
 	top: 0;
 	left: 0;
-    border-radius: 100%;
 }
 
-.join-button:hover{
-	box-shadow: 0px 0px 20px rgba(204, 0, 255, 0.5);
+.join-button::after{
+	border-radius: 100%;
+}
+
+.choose-case-button::after{
+	border-radius: 18px;
 }
 
 .players-container{
@@ -84,27 +99,19 @@ body{
 	grid-template-rows: 28px 1fr;
 }
 
-.sub-title{
-	font-weight: 700;
-	font-size: 16px;
-	color: #6D737A;
-	margin: 0;
-}
-
 .players-wrapper{
 	display: flex;
 	justify-content: space-between;
 }
 
-.players-checkbox{
+input[type='checkbox']{
 	width: 45px;
 	height: 45px;
 	visibility: hidden;
 	cursor: pointer;
-    position: relative;
 }
 
-.players-checkbox::before{
+input[type='checkbox']::before{
 	content: attr(data-number);;
 	color: #D6E1EF;
 	font-size: 20px;
@@ -112,6 +119,7 @@ body{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	/* font-family: 'Sarabun', sans-serif; */
 	width: 45px;
 	height: 45px;
 	background-image: linear-gradient(320deg, #16191D 50%, #262B2F 100%);
@@ -122,16 +130,23 @@ body{
 	transition: box-shadow 0.3s;
 }
 
-.players-checkbox:hover::before{
+input[type='checkbox']:hover::before{
 	box-shadow: 0px 0px 15px rgba(204, 0, 255, 0.5);
 }
 
-.players-checkbox:checked::before{
+input[type='checkbox']:checked::before{
 	background-image: linear-gradient(135deg, #be4bdb 5%, #9775fa 95%);
 	visibility: visible;
 }
 
-.choose-button{
+.sub-title{
+	font-weight: 700;
+	font-size: 16px;
+	color: #6D737A;
+	margin: 0;
+}
+
+.choose-case-button{
 	width: 230px;
 	height: 50px;
 	border-radius: 16px;
@@ -142,50 +157,4 @@ body{
 	font-size: 16px;
 	color: #D6E1EF;
 	font-weight: 700;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.choose-button::before{
-    content: '';
-	background-image: linear-gradient(135deg, #be4bdb 5%, #9775fa 95%);
-	width: calc(100% + 2px);
-	height: calc(100% + 2px);
-	margin: -1px -1px;
-	position: absolute;
-	z-index: -1;
-	top: 0;
-	left: 0;
-    border-radius: 17px;
-}
-
-/* CASES */
-
-.cases-wrapper{
-	width: var(--app-width);
-	height: var(--app-height);
-	display: grid;
-	grid-template-rows: 50px 30px auto 50px;
-}
-
-.input-wrapper{
-	background-color: red;
-}
-
-.cases-control-wrapper{
-	background-color: green;
-}
-
-.cases-list{
-	background-color: teal;
-	margin: 0;
-	overflow-y: scroll;
-}
-
-.ready-button{
-	background-color: yellow;
-	background-image: linear-gradient(135deg, #be4bdb 5%, #9775fa 95%);
-	
 }

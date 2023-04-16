@@ -11,42 +11,35 @@
 	<title>Keydrop sniper</title>
 </head>
 <body>
-	<div class="content-wrapper">
-		<h1 class="title">Keydrop Sniper</h1>
-		<div class="join-button">
-			<h1 class="title">Join</h1>
-		</div>
-		<div class="players-container">
-			<h3 class="sub-title">Number of players:</h3>
-			<div class="players-wrapper">
-				<input type="checkbox" name="" id="">
+    <div class="wrapper">
+        <div class="control-wrapper" id="control">
+			<h1 class="title">Keydrop Sniper</h1>
+			<div class="join-button">
+				<h1 class="title">Start</h1>
+			</div>
+			<div class="players-container">
+				<h3 class="sub-title">Number of players:</h3>
+				<div class="players-wrapper">
+					<input type="checkbox" name="" id="" class="players-checkbox" data-number="2">
+					<input type="checkbox" name="" id="" class="players-checkbox" data-number="3">
+					<input type="checkbox" name="" id="" class="players-checkbox" data-number="4">
+				</div>
+			</div>
+			<a href="#cases" class="choose-button">Choose case</a>
+        </div>
+        <div class="cases-wrapper" id="cases">
+			<div class="input-wrapper">
+				<input type="text" class="cases-input">
+			</div>
+			<div class="cases-control-wrapper">
 				<input type="checkbox" name="" id="">
 				<input type="checkbox" name="" id="">
 			</div>
-		</div>
+			<ul class="cases-list">
 
-		<button class="choose-case-button">Choose case</button>
-	</div>
-  <!-- <fieldset>
-    <legend>Number of players: (multiple allowed)</legend>
-
-    <div>
-      <input type="checkbox" id="2" name="2" class="players-checkbox">
-      <label for="2">2</label>
+			</ul>
+			<a href="#control" class="ready-button">Ready</a>
+        </div>
     </div>
-
-    <div>
-      <input type="checkbox" id="3" name="3" class="players-checkbox">
-      <label for="3">3</label>
-    </div>
-
-    <div>
-      <input type="checkbox" id="4" name="4" class="players-checkbox">
-      <label for="4">4</label>
-    </div>
-</fieldset>
-
-  <button id="click">CLICK</button> -->
 </body>
-
 </html>
