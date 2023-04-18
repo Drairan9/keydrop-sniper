@@ -22,6 +22,7 @@ CASES.forEach((caseName) => {
     let checkbox = _createElement('input', {
         type: 'checkbox',
         'data-case-name': caseName.toLocaleLowerCase(),
+        'data-visibility': 'visible',
         class: 'case-checkbox',
     });
     casesCheckboxes.push(checkbox);
