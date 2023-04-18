@@ -2,6 +2,7 @@ const cases = document.querySelectorAll('.case-checkbox');
 const hideSelectedCheckbox = document.querySelector('.cases-option-checkbox[data-type="0"]');
 const hideNonSelectedCheckbox = document.querySelector('.cases-option-checkbox[data-type="1"]');
 const searchInput = document.querySelector('.cases-input');
+const casesList = document.querySelector('.cases-list');
 
 searchInput.addEventListener('keyup', searchAndDisplayResults);
 
@@ -13,6 +14,7 @@ hideSelectedCheckbox.addEventListener('change', () => {
     } else {
         toggleSelected(false);
     }
+    checkEmptyResults();
 });
 
 hideNonSelectedCheckbox.addEventListener('change', () => {
@@ -23,6 +25,7 @@ hideNonSelectedCheckbox.addEventListener('change', () => {
     } else {
         toggleNonSelected(false);
     }
+    checkEmptyResults();
 });
 
 function toggleSelected(state) {
@@ -75,4 +78,19 @@ function searchAndDisplayResults() {
             caseElement.parentNode.style.display = 'none';
         }
     });
+    checkEmptyResults();
+}
+
+function checkEmptyResults() {
+    let resultsAmount = 0;
+    cases.forEach((element) => {
+        if (element.parentNode.style.display == 'block') {
+            resultsAmount++;
+        }
+    });
+    if (resultsAmount === 0) {
+        casesList.classList.add('cases-list-empty');
+    } else {
+        casesList.classList.remove('cases-list-empty');
+    }
 }
