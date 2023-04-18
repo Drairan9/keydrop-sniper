@@ -9,7 +9,6 @@ const CASES = [
     'ENERGY',
     'ICE BLAST',
     'ROCKET RACCON',
-    'TECH',
     'DAGGERS',
     'CERES',
     'TECH',

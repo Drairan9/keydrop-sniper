@@ -1,7 +1,9 @@
 const cases = document.querySelectorAll('.case-checkbox');
-
 const hideSelectedCheckbox = document.querySelector('.cases-option-checkbox[data-type="0"]');
 const hideNonSelectedCheckbox = document.querySelector('.cases-option-checkbox[data-type="1"]');
+const searchInput = document.querySelector('.cases-input');
+
+searchInput.addEventListener('keyup', searchAndDisplayResults);
 
 hideSelectedCheckbox.addEventListener('change', () => {
     if (hideSelectedCheckbox.checked) {
@@ -61,4 +63,16 @@ function toggleNonSelected(state) {
             }
         });
     }
+}
+
+function searchAndDisplayResults() {
+    let query = this.value.toUpperCase();
+    cases.forEach((caseElement) => {
+        let name = caseElement.dataset.caseName.toUpperCase();
+        if (name.indexOf(query) > -1 && caseElement.dataset.visibility == 'visible') {
+            caseElement.parentNode.style.display = 'block';
+        } else {
+            caseElement.parentNode.style.display = 'none';
+        }
+    });
 }
