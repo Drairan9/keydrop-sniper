@@ -1,5 +1,5 @@
 const mainList = document.querySelector('.cases-list');
-const casesCheckboxes = document.querySelector('.case-checkbox');
+const casesCheckboxes = [];
 const CASES = [
     'TOXIC',
     'DIABLO',
@@ -24,13 +24,16 @@ CASES.forEach((caseName) => {
         'data-case-name': caseName.toLocaleLowerCase(),
         class: 'case-checkbox',
     });
+    casesCheckboxes.push(checkbox);
+    checkbox.addEventListener('change', saveCheckboxesState);
+
     li.appendChild(checkbox);
     mainList.appendChild(li);
 });
 
 function saveCheckboxesState() {
     let statesObject = {};
-    mainList.children.forEach((element) => {
+    casesCheckboxes.forEach((element) => {
         statesObject[element.dataset.caseName] = element.checked;
     });
 
@@ -38,11 +41,11 @@ function saveCheckboxesState() {
 }
 
 chrome.storage.local.get(['casesState'], (data) => {
-    if (data != []) return;
+    if (data.casesState === undefined) return;
     Object.keys(data.casesState).forEach((key) => {
-        for (let i = 0; i < mainList.children.length; i++) {
-            if (mainList.children[i].dataset.caseName === key) {
-                mainList.children[i].checked = data.casesState[key];
+        for (let i = 0; i < casesCheckboxes.length; i++) {
+            if (casesCheckboxes[i].dataset.caseName === key) {
+                casesCheckboxes[i].checked = data.casesState[key];
                 return;
             }
         }
