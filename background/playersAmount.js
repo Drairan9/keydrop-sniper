@@ -14,6 +14,7 @@ function saveCheckboxesState() {
 }
 
 chrome.storage.local.get(['playersState'], (data) => {
+    if (data != []) return;
     Object.keys(data.playersState).forEach((key) => {
         for (let i = 0; i < playersCheckboxes.length; i++) {
             if (playersCheckboxes[i].dataset.number === key) {
