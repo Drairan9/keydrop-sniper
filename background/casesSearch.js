@@ -29,43 +29,21 @@ hideNonSelectedCheckbox.addEventListener('change', () => {
 });
 
 function toggleSelected(state) {
-    if (state) {
-        // Hide
-        cases.forEach((caseElement) => {
-            if (caseElement.checked) {
-                caseElement.dataset.visibility = 'hidden';
-                caseElement.parentNode.style.display = 'none';
-            }
-        });
-    } else {
-        // Show
-        cases.forEach((caseElement) => {
-            if (caseElement.checked) {
-                caseElement.dataset.visibility = 'visible';
-                caseElement.parentNode.style.display = 'block';
-            }
-        });
-    }
+    cases.forEach((caseElement) => {
+        if (caseElement.checked) {
+            caseElement.dataset.visibility = state ? 'hidden' : 'visible';
+            caseElement.parentNode.style.display = state ? 'none' : 'block';
+        }
+    });
 }
 
 function toggleNonSelected(state) {
-    if (state) {
-        // Hide
-        cases.forEach((caseElement) => {
-            if (!caseElement.checked) {
-                caseElement.dataset.visibility = 'hidden';
-                caseElement.parentNode.style.display = 'none';
-            }
-        });
-    } else {
-        // Show
-        cases.forEach((caseElement) => {
-            if (!caseElement.checked) {
-                caseElement.dataset.visibility = 'visible';
-                caseElement.parentNode.style.display = 'block';
-            }
-        });
-    }
+    cases.forEach((caseElement) => {
+        if (!caseElement.checked) {
+            caseElement.dataset.visibility = state ? 'hidden' : 'visible';
+            caseElement.parentNode.style.display = state ? 'none' : 'block';
+        }
+    });
 }
 
 function searchAndDisplayResults() {
