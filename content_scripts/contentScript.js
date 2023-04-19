@@ -3,7 +3,7 @@ console.log('%c key-sniper injected', 'color: red;');
 var listenerSettings = {
     listening: false,
     called: false,
-    players: [],
+    players: [2, 3, 4],
     cases: ['TOXIC', 'DIABLO', 'MILSPEC', 'SPARK', 'DAGGER', 'ENERGY', 'ICE BLAST', 'ROCKET RACCON', 'TECH', 'DAGGERS'],
 };
 const TARGETS = [
@@ -26,14 +26,14 @@ const TARGETS = [
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.action == 'start-listening') {
         listenerSettings.listening = true;
-        listenerSettings.players = message.players.length > 0 ? message.players : [2, 3, 4];
+        listenerSettings.players = message.players.length > 0 ? message.players : listenerSettings.players;
         listenerSettings.cases = message.cases.length > 0 ? message.cases : listenerSettings.cases;
         createIsland(listenerSettings.players, listenerSettings.cases);
         startBattleListener();
     }
 });
 
-function createIsland(players = [0], cases = ['NONE', 'TECH', 'ICE BLAST', 'CEREES']) {
+function createIsland(players = [0], cases = ['NONE']) {
     let existingIsland = document.querySelector('.kd-sniper_container');
     if (existingIsland) existingIsland.remove();
 
