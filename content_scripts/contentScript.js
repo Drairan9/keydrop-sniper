@@ -1,5 +1,8 @@
 console.log('%c key-sniper injected', 'color: red;');
 
+var startTime;
+var timer;
+
 var listenerSettings = {
     listening: false,
     called: false,
@@ -30,6 +33,7 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
         listenerSettings.cases = message.cases.length > 0 ? message.cases : listenerSettings.cases;
         createIsland(listenerSettings.players, listenerSettings.cases);
         startBattleListener();
+        startTimer();
     }
 });
 
@@ -60,13 +64,29 @@ function createIsland(players = [0], cases = ['NONE']) {
     document.body.appendChild(container);
 }
 
+function startTimer() {
+    startTime = Date.now();
+    timer = setInterval(updateTimer, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timer);
+}
+
+function updateTimer() {
+    let currentTime = Date.now();
+    var elapsedTime = ((currentTime - startTime) / 1000).toFixed(0);
+    document.querySelector('.kd-sniper_et-dynamic').textContent = `${Math.floor(elapsedTime / 60)}m ${
+        elapsedTime % 60
+    }s`;
+}
+
 async function startBattleListener() {
     if (listenerSettings.called) return;
     listenerSettings.called = true;
 
     while (listenerSettings.listening) {
         await new Promise((resolve, reject) => setTimeout(resolve, 50));
-        console.log(`Searching battle with ${listenerSettings.players} players.`);
         const battles = Array.from(document.querySelectorAll('.relative.my-10.z-0')).filter((battle) =>
             battle.querySelector('.text-center.text-sm.font-bold.text-green')
         );
@@ -87,6 +107,7 @@ async function startBattleListener() {
                     button.click();
                     listenerSettings.listening = false;
                     listenerSettings.called = false;
+                    stopTimer();
                 }
             }
         });

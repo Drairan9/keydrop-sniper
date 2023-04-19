@@ -8,7 +8,7 @@ startButton.addEventListener('click', () => {
         if (element.checked) selectedCases.push(element.dataset.caseName.toUpperCase());
     });
     document.querySelectorAll('.players-checkbox').forEach((element) => {
-        if (element.checked) selectedPlayers.push(element.dataset.number);
+        if (element.checked) selectedPlayers.push(parseInt(element.dataset.number));
     });
 
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {

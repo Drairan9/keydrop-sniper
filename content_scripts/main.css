@@ -13,10 +13,19 @@
     left: 50%;
     right: 50%;
     transform: translate(-50%); 
+    white-space: nowrap;
 }
 
 .kd-sniper_container > * {
     font-size: 16px;
     margin: 0;
+    font-weight: 400;
+}
+
+.kd-sniper_players-static, .kd-sniper_cases-static, .kd-sniper_et-static{
+    font-weight: 800;
+}
+
+.kd-sniper_players-dynamic, .kd-sniper_cases-dynamic, .kd-sniper_et-dynamic{
     font-weight: 400;
 }
