@@ -64,6 +64,12 @@ function createIsland(players = [0], cases = ['NONE']) {
     document.body.appendChild(container);
 }
 
+function killIsland() {
+    let existingIsland = document.querySelector('.kd-sniper_container');
+    if (!existingIsland) return;
+    existingIsland.remove();
+}
+
 function startTimer() {
     startTime = Date.now();
     timer = setInterval(updateTimer, 1000);
@@ -108,6 +114,7 @@ async function startBattleListener() {
                     listenerSettings.listening = false;
                     listenerSettings.called = false;
                     stopTimer();
+                    killIsland();
                 }
             }
         });
