@@ -42,6 +42,21 @@ body{
     justify-items: center;
 }
 
+.version{
+	position: absolute;
+	bottom: 0;
+	margin: 0;
+	color: #6d737abe;
+	font-size: 14px;
+}
+
+.update-button{
+	text-decoration: none;
+	color: orange;
+	margin-left: 20px;
+	cursor: pointer;
+}
+
 /* CONTROL PANEL */
 
 .control-wrapper{
@@ -52,6 +67,7 @@ body{
 	justify-items: center;
 	align-items: center;
 	row-gap: 5px;
+	position: relative;
 }
 
 .title{

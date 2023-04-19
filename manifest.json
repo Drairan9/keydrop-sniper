@@ -15,7 +15,8 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["./content_scripts/test.js"]
+      "js": ["./content_scripts/contentScript.js"],
+      "css": ["./content_scripts/main.css"]
     }
   ],
   "permissions": [

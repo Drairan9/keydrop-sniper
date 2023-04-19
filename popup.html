@@ -10,6 +10,8 @@
 	<script src="background/playersAmount.js" defer></script>
 	<script src="background/casesSelector.js" defer></script>
 	<script src="background/casesSearch.js" defer></script>
+	<script src="background/contentController.js" defer></script>
+	<script src="background/update.js" defer></script>
 	<title>Keydrop sniper</title>
 </head>
 <body>
@@ -28,6 +30,7 @@
 				</div>
 			</div>
 			<a href="#cases" class="choose-button">Choose case</a>
+			<p class="version">Version: <span class="version-content"></span></p>
         </div>
         <div class="cases-wrapper" id="cases">
 			<div class="input-wrapper">
@@ -37,8 +40,7 @@
 				<input type="checkbox" class="cases-option-checkbox" data-type="1" data-text="Only selected">
 				<input type="checkbox" class="cases-option-checkbox" data-type="0" data-text="Only unselected">
 			</div>
-			<ul class="cases-list">
-			</ul>
+			<ul class="cases-list"></ul>
 			<a href="#control" class="ready-button">Ready</a>
         </div>
     </div>

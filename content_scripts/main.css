@@ -1,0 +1,22 @@
+.kd-sniper_container{
+    font-family: 'Courier New', monospace;
+    background-image: linear-gradient(45deg, #111111 47%, #090909 100%);
+    position: fixed;
+    top: 10vh;
+    width: fit-content;
+    min-width: 200px;
+    height: fit-content;
+    z-index: 9999;
+    color: #00FF41;
+    padding: 3px;
+    border: 1px #008F11 dashed;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%); 
+}
+
+.kd-sniper_container > * {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 400;
+}
