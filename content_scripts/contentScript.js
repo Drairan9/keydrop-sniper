@@ -1,30 +1,67 @@
 console.log('%c key-sniper injected', 'color: red;');
+let div = document.createElement('div');
+div.setAttribute(
+    'style',
+    `width: 150px; 
+    height: 50px;
+    background: rgba(255,68,93, 1);
+    position: fixed;
+    z-index: 100;
+    top:0;
+    left: 0;
+    margin: 50px 0 0 50px;
+    pointer-events: none;
+    border-radius: 20px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    `
+);
+div.textContent = 'Keydrop sniper';
+document.body.appendChild(div);
+
+// Extension
 
 var startTime;
 var timer;
+
+const TARGETS = [
+    'ICE BLAST',
+    'MILSPEC',
+    'BEAST',
+    'ADVANCE',
+    'MARKER',
+    'TEETH',
+    'STACK',
+    'TECH',
+    'AK-47',
+    'AGENT',
+    'GIZMO',
+    'JOCASTA',
+    'TOXIC',
+    'BULLET',
+    'ENTRY',
+    'SPEC',
+    'KICK',
+    'RIPTIDE',
+    'DAGGERS',
+    'COOKIE MAN',
+    'TYRANT',
+    'ENERGY',
+    'SCORE',
+    'BANANA',
+    'AVALANCHE',
+    'STACK',
+];
 
 var listenerSettings = {
     listening: false,
     called: false,
     players: [2, 3, 4],
-    cases: ['TOXIC', 'DIABLO', 'MILSPEC', 'SPARK', 'DAGGER', 'ENERGY', 'ICE BLAST', 'ROCKET RACCON', 'TECH', 'DAGGERS'],
+    cases: [...TARGETS],
 };
-const TARGETS = [
-    'TOXIC',
-    'DIABLO',
-    'MILSPEC',
-    'SPARK',
-    'DAGGER',
-    'ENERGY',
-    'ICE BLAST',
-    'ROCKET RACCON',
-    'TECH',
-    'DAGGERS',
-    'CERES',
-    'TECH',
-    'JOY',
-    'PROGRESS',
-];
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.action == 'start-listening') {
@@ -92,32 +129,25 @@ async function startBattleListener() {
     listenerSettings.called = true;
 
     while (listenerSettings.listening) {
-        await new Promise((resolve, reject) => setTimeout(resolve, 50));
-        const battles = Array.from(document.querySelectorAll('.relative.my-10.z-0')).filter((battle) =>
-            battle.querySelector('.text-center.text-sm.font-bold.text-green')
-        );
-        battles.forEach((item) => {
-            let casesElements = item.querySelectorAll(
-                '.line-clamp.max-w-full.overflow-hidden.break-words.px-1.text-center.font-semibold.leading-none.text-white'
-            );
-            let playersAmount = item.querySelector('.ml-4.text-base.font-bold.text-white')?.textContent;
-            if (playersAmount === undefined) return;
+        await new Promise((resolve, reject) => setTimeout(resolve, 100));
+        const caseNames = [...document.querySelectorAll('p.max-w-full.px-1.overflow-hidden')]
+            .splice(0, 4)
+            .map((e) => e.textContent);
+        const casePrices = [...document.querySelectorAll('div.flex.items-center.justify-center.rounded-tl-lg')]
+            .splice(0, 4)
+            .map((e) => e.textContent);
+        const joinbuttons = [...document.querySelectorAll('a.button.ml-1.mr-5')];
 
-            playersAmount = parseInt(playersAmount.split('/')[1]);
-            if (!listenerSettings.players.includes(playersAmount)) return;
+        let matchingCaseName = caseNames.find((element) => TARGETS.includes(element));
 
-            let casesArray = Array.from(casesElements, (p) => p.textContent);
-            if (casesArray.find((name) => TARGETS.includes(name))) {
-                let button = item.querySelector('.button.ml-1.mr-5.h-12.w-auto.flex-1.button-green-dimmed');
-                if (button) {
-                    button.click();
-                    listenerSettings.listening = false;
-                    listenerSettings.called = false;
-                    stopTimer();
-                    killIsland();
-                }
-            }
-        });
+        if (casePrices[caseNames.indexOf(matchingCaseName)] === 'FREE') {
+            const button = joinbuttons[caseNames.indexOf(matchingCaseName)];
+            button.click();
+            listenerSettings.listening = false;
+            listenerSettings.called = false;
+            stopTimer();
+            killIsland();
+        }
     }
 }
 
