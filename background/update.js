@@ -9,7 +9,8 @@ function checkForUpdates() {
     fetch(url).then((res) => {
         const urlArray = res.url.split('/');
         const version = urlArray.pop();
-        if (manifest != version) {
+        console.log(manifest, version);
+        if (manifest.version != version) {
             console.log('Update needed!');
             versionTextElement.style.color = 'red';
             let a = document.createElement('a');
